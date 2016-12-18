@@ -17,6 +17,8 @@ app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $url
       templateUrl: '/templates/register.html',
       controller: 'AuthCtrl'
     })
-
+   
   $urlRouterProvider.otherwise('home');
 }]);
+
+

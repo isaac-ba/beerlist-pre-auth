@@ -7,6 +7,8 @@ mongoose.connect('mongodb://localhost/beers');
 var Beer = require("./models/BeerModel");
 var Review = require("./models/ReviewModel");
 var User = require('./models/UserModel')
+var LocalStrategy = require('passport-local').Strategy;
+
 
 var app = express();
 
@@ -80,6 +82,18 @@ app.post('/beers/:id/reviews', function(req, res, next) {
     });
   });
 });
+
+
+passport.use('register', new LocalStrategy(function (username, password, done) {
+  var user = {
+    username: username,
+    password: password
+  }
+
+  console.log(user);
+
+  done(null, user);
+}));
 
 app.delete('/beers/:beer/reviews/:review', function(req, res, next) {
   Beer.findById(req.params.beer, function (err, beer) {
