@@ -1,6 +1,8 @@
-app.controller('MainCtrl', ['$scope','beers', function($scope, beers){
+app.controller('MainCtrl', ['$scope','beers','auth', function($scope, beers,auth){
   beers.getAll().then(function () {
     $scope.beers = beers.beers;
+  },function(error){
+      console.log(error);
   });
 
   $scope.addBeer = function() {
@@ -22,4 +24,9 @@ app.controller('MainCtrl', ['$scope','beers', function($scope, beers){
   $scope.removeBeer = function (beer) {
     beers.delete(beer);
   };
+
+  $scope.currentUser = auth.getCurrentUser($scope.user);
+ 
+  
+
 }]);
